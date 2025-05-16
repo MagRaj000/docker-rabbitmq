@@ -31,7 +31,7 @@ jobs:
 
       - name: Set lowercase image tag
         run: |
-          IMAGE_NAME="ghcr.io/${GITHUB_ACTOR,,}/${{ github.repository }}:latest"
+          IMAGE_NAME="ghcr.io/${GITHUB_ACTOR,,}/docker-rabbitmq:latest"
           echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
 
       - name: Build Docker image
