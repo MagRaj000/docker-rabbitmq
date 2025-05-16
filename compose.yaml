@@ -1,8 +1,24 @@
 services:
   rabbitmq:
     image: 'rabbitmq:latest'
+    container_name: 'guide-rabbit'
     environment:
       - 'RABBITMQ_DEFAULT_PASS=secret'
       - 'RABBITMQ_DEFAULT_USER=myuser'
     ports:
-      - '5672'
+      - '5672:5672'
+#      - '5672'
+
+  spring-boot-app:
+    build: .
+    container_name: 'spring-boot-app'
+    depends_on:
+      - rabbitmq
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: myuser
+      SPRING_RABBITMQ_PASSWORD: secret
+    ports:
+      - '8080:8080'
+
